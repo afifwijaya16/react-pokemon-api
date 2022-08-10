@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
 const Card = ({ id, name }) => {
   const [detail, setDetail] = useState([]);
 
@@ -10,7 +10,6 @@ const Card = ({ id, name }) => {
         await axios
           .get(`http://localhost:4000/detail/${id}`)
           .then((response) => {
-            console.log(response.data.sprites.other.dream_world.front_default);
             const result =
               response.data.sprites.other.dream_world.front_default;
             setDetail(result);
@@ -23,11 +22,19 @@ const Card = ({ id, name }) => {
   }, [id]);
 
   return (
-    <div className="card">
-      <img src={detail} alt={name} height={50} width={100} />
-      <div class="card-body">
-        <h5 class="card-title">{name}</h5>
-      </div>
+    <div className="card p-2">
+      <img
+        src={detail}
+        className="my-2 bg-danger p-2"
+        alt={name}
+        style={{ height: "300px", width: "100%" }}
+      />
+      <ul className="list-group list-group-flush">
+        <li className="list-group-item">
+          <h4>{name}</h4>
+          <Link to={`detail/${id}`}>Detail</Link>
+        </li>
+      </ul>
     </div>
   );
 };

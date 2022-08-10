@@ -11,7 +11,9 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/list", async (req, res) => {
-  const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon");
+  const { data } = await axios.get(
+    "https://pokeapi.co/api/v2/pokemon?limit=100&offset=0n"
+  );
   // console.log(data.results);
   res.send(data.results);
 });
@@ -21,7 +23,7 @@ app.get("/detail/:id", async (req, res) => {
   const { data } = await axios.get(
     `https://pokeapi.co/api/v2/pokemon/${pokeId}`
   );
-  console.log(data);
+  // console.log(data);
   res.send(data);
 });
 
