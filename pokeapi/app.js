@@ -16,6 +16,15 @@ app.get("/list", async (req, res) => {
   res.send(data.results);
 });
 
+app.get("/detail/:id", async (req, res) => {
+  const pokeId = req.params.id;
+  const { data } = await axios.get(
+    `https://pokeapi.co/api/v2/pokemon/${pokeId}`
+  );
+  console.log(data);
+  res.send(data);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
